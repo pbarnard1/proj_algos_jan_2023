@@ -2,6 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,java,python,django,flask,react,node,macos,linux,windows
 
 # Added by me
+/lectures/basic_13_algos.js
+/lectures/basic_13_starter.js
 
 
 ### Django ###
