@@ -18,18 +18,46 @@ const generateNewPuzzle = (puzzleSize) => { // puzzleSize = number of rows (and 
     valuesToPick.push(null); // Placeholder that has no value ("blank" tile)
     // console.log(valuesToPick);
     // Put the actual values into the grid itself
-
+    let thisRow;
     for (let k = 0; k < puzzleSize*puzzleSize; k++) { // DANGER: Do NOT use valuesToPick.length, as that's changing in your loop!!
+        if (k === 0) {
+            thisRow = [];
+        }
         let randomIndex = Math.floor(Math.random()*valuesToPick.length);
         let randomVal = valuesToPick[randomIndex];
         // Ensure that once a value is picked, it can't be chosen again
         valuesToPick.splice(randomIndex, 1);
-        console.log(`Current iteration: ${k+1}`);
-        console.log("Value picked: " + randomVal);
-        console.log(valuesToPick);
+        // console.log(`Current iteration: ${k+1}`);
+        // console.log("Value picked: " + randomVal);
+        // console.log(valuesToPick);
         // Make sure we're pushing to the correct row (subarray)
-        newGrid.push(randomVal);
+        thisRow.push(randomVal);
+        // console.log(thisRow);
+        if (thisRow.length == puzzleSize) {
+            newGrid.push(thisRow);
+            // console.log(newGrid);
+            thisRow = []; // Empty the array for the next row of numbers
+        }
     }
+    console.log(newGrid);
 }
 
-generateNewPuzzle(5);
+const isSolvable = (thisGrid) => {
+    let inversionCount = 0; // Count the number of inversions in the grid
+    // How would you count the inversions?  A single for loop?  Multiple (nested) for loops?  A clever array function?
+}
+
+/* Tasks:
+1: Making sure our grid is solvable.  (Thanks to: "ensuring a sliding puzzle is solvable"
+    https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php
+
+In summary, when n is odd, an n-by-n board is solvable if and only if its number of inversions is even.
+That is, when n is even, an n-by-n board is solvable if and only if the number of inversions plus the 
+row of the blank square is odd. This assumes we start with row 0.
+
+
+2: Rendering this grid in HTML.
+3: Check to see if the current grid as is is the solution.
+4: Write the rules for how to move pieces.
+*/
+generateNewPuzzle(6);
