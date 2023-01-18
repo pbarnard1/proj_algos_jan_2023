@@ -39,12 +39,33 @@ const generateNewPuzzle = (puzzleSize) => { // puzzleSize = number of rows (and 
             thisRow = []; // Empty the array for the next row of numbers
         }
     }
-    console.log(newGrid);
+    return newGrid;
 }
 
 const isSolvable = (thisGrid) => {
+    console.log(thisGrid);
     let inversionCount = 0; // Count the number of inversions in the grid
-    // How would you count the inversions?  A single for loop?  Multiple (nested) for loops?  A clever array function?
+    // Move all the values to a 1-D grid so we can count inversions more easily
+    let oneDimensionalGrid = [];
+    for (let row = 0; row < thisGrid.length; row++) {
+        oneDimensionalGrid = [...oneDimensionalGrid, ...thisGrid[row]]; // Add current row
+    }
+    // Find row where null is found (to do Wednesday)
+
+    // Count the number of inversions
+    for (let i = 0; i < oneDimensionalGrid.length - 1; i++) { // From 1st through 2nd-to-last item
+        for (let j = i + 1; j < oneDimensionalGrid.length; j++) { // From item immediately afterward to last item
+            // Check to see if not null (null is a "falsy" value) and if there actually is an inversion
+            if (oneDimensionalGrid[i] && oneDimensionalGrid[j] && oneDimensionalGrid[i] > oneDimensionalGrid[j]) {
+                inversionCount++;
+            }
+
+        }
+    }
+    console.log(oneDimensionalGrid);
+    console.log(inversionCount);
+
+    // We will return a boolean here
 }
 
 /* Tasks:
@@ -60,4 +81,12 @@ row of the blank square is odd. This assumes we start with row 0.
 3: Check to see if the current grid as is is the solution.
 4: Write the rules for how to move pieces.
 */
-generateNewPuzzle(6);
+const grid1 = generateNewPuzzle(3);
+// console.log(grid1);
+isSolvable(grid1);
+
+/* Thanks Gary!  This is a good way to check to see how long your code runs!
+console.time('Runtime:')
+// code goes here
+console.timeEnd('Runtime:')
+*/
