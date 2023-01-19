@@ -7,6 +7,13 @@
 // ]
 // console.log(starter_puzzle);
 // console.log(starter_puzzle[3]);
+const makeSolvableGrid = (puzzleSize) => {
+    let newGrid = generateNewPuzzle(puzzleSize); // Start with a new grid to get us going
+    while (!isSolvable(newGrid)) { // While the current grid is not solvable...
+        newGrid = generateNewPuzzle(puzzleSize); // Make a new grid
+    }
+    return newGrid; // Return the solvable grid
+}
 
 // Randomly generate the board
 const generateNewPuzzle = (puzzleSize) => { // puzzleSize = number of rows (and columns)
@@ -51,9 +58,12 @@ const isSolvable = (thisGrid) => {
         oneDimensionalGrid = [...oneDimensionalGrid, ...thisGrid[row]]; // Add current row
     }
     // Find row where null is found (to do Wednesday)
-
+    let rowWithBlankSpace;
     // Count the number of inversions
     for (let i = 0; i < oneDimensionalGrid.length - 1; i++) { // From 1st through 2nd-to-last item
+        if (!oneDimensionalGrid[i]) {
+            rowWithBlankSpace = Math.floor(i / thisGrid.length);
+        }
         for (let j = i + 1; j < oneDimensionalGrid.length; j++) { // From item immediately afterward to last item
             // Check to see if not null (null is a "falsy" value) and if there actually is an inversion
             if (oneDimensionalGrid[i] && oneDimensionalGrid[j] && oneDimensionalGrid[i] > oneDimensionalGrid[j]) {
@@ -64,8 +74,9 @@ const isSolvable = (thisGrid) => {
     }
     console.log(oneDimensionalGrid);
     console.log(inversionCount);
-
-    // We will return a boolean here
+    // Ternary operator (one-line if statement essentially)
+    // statement_to_check ? value_if_true : value_if_false;
+    return thisGrid.length % 2 == 0 ? inversionCount + rowWithBlankSpace % 2 == 1 : inversionCount % 2 == 0;
 }
 
 /* Tasks:
@@ -81,10 +92,24 @@ row of the blank square is odd. This assumes we start with row 0.
 3: Check to see if the current grid as is is the solution.
 4: Write the rules for how to move pieces.
 */
-const grid1 = generateNewPuzzle(3);
-// console.log(grid1);
-isSolvable(grid1);
 
+const grid1 = makeSolvableGrid(3);
+// console.log(grid1);
+console.log(isSolvable(grid1));
+
+let gridDiv = document.getElementById("main_grid");
+for (let i = 0; i < grid1.length; i++) {
+    let newRow = document.createElement("div");
+    // To add classes/IDs, use .setAttribute('class/id','name_of_class/id')
+    for (let j = 0; j < grid1[i].length; j++) {
+        let newItem = document.createElement('div');
+        let actualValue = grid1[i][j];
+        let valueToInsert = document.createTextNode(actualValue); // Allows us to put in the actual value in the div itself
+        newItem.appendChild(valueToInsert);
+        newRow.appendChild(newItem);
+    }
+    gridDiv.appendChild(newRow);
+}
 /* Thanks Gary!  This is a good way to check to see how long your code runs!
 console.time('Runtime:')
 // code goes here
