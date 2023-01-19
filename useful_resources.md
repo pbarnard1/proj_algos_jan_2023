@@ -16,6 +16,7 @@
 - [Color Palettes](https://colorhunt.co/)
 - [Material UI Dashboards - React](https://www.creative-tim.com/product/material-dashboard-react?AFFILIATE=128200)
 - [UI Gradients](https://uigradients.com/)
+- [LESS demo by Melissa](https://hackmd.io/fGzQTZXjQMOJRjW6k14Zvw?view)
 
 ## Flask
 - [Flask Extensions/Libraries](https://www.fullstackpython.com/flask-extensions-plug-ins-related-libraries.html)
@@ -109,5 +110,9 @@
 - [Markdown](https://www.tablesgenerator.com/markdown_tables)
 - [SQL Cheat Sheet](https://learnsql.com/blog/sql-basics-cheat-sheet/)
 - [MongoDB CheatSheet](https://www.mongodb.com/developer/products/mongodb/cheat-sheet/)
+
+## Other demos by Melissa
+- [Dynamically rendering images](https://github.com/melissa-24/favoriteImages/blob/main/htmlOnly/js/tunes.js)
+- [Using an API to render an image dynamically](https://github.com/melissa-24/favoriteImages/blob/main/htmlOnly/js/nasa.js)
 
 Thank you everybody for helping create this resource sheet!  You are all awesome!!!
