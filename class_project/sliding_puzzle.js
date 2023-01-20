@@ -79,20 +79,6 @@ const isSolvable = (thisGrid) => {
     return thisGrid.length % 2 == 0 ? inversionCount + rowWithBlankSpace % 2 == 1 : inversionCount % 2 == 0;
 }
 
-/* Tasks:
-1: Making sure our grid is solvable.  (Thanks to: "ensuring a sliding puzzle is solvable"
-    https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php
-
-In summary, when n is odd, an n-by-n board is solvable if and only if its number of inversions is even.
-That is, when n is even, an n-by-n board is solvable if and only if the number of inversions plus the 
-row of the blank square is odd. This assumes we start with row 0.
-
-
-2: Rendering this grid in HTML.
-3: Check to see if the current grid as is is the solution.
-4: Write the rules for how to move pieces.
-*/
-
 const grid1 = makeSolvableGrid(3);
 // console.log(grid1);
 console.log(isSolvable(grid1));
@@ -100,12 +86,22 @@ console.log(isSolvable(grid1));
 let gridDiv = document.getElementById("main_grid");
 for (let i = 0; i < grid1.length; i++) {
     let newRow = document.createElement("div");
+    newRow.setAttribute("class","row");
     // To add classes/IDs, use .setAttribute('class/id','name_of_class/id')
     for (let j = 0; j < grid1[i].length; j++) {
         let newItem = document.createElement('div');
+        // ds-data and use that to leverage where we are in the grid - thank you Thomas!
+        
+        // newItem.classList.add(); // Adding a class
+        // newItem.classList.toggle(); // For toggling a class (adding/removing)
         let actualValue = grid1[i][j];
-        let valueToInsert = document.createTextNode(actualValue); // Allows us to put in the actual value in the div itself
-        newItem.appendChild(valueToInsert);
+        if (actualValue === null) {
+            newItem.setAttribute("class","blank_space");
+        } else {
+            newItem.setAttribute("class","item");
+            let valueToInsert = document.createTextNode(actualValue); // Allows us to put in the actual value in the div itself
+            newItem.appendChild(valueToInsert);
+        }
         newRow.appendChild(newItem);
     }
     gridDiv.appendChild(newRow);
@@ -114,4 +110,24 @@ for (let i = 0; i < grid1.length; i++) {
 console.time('Runtime:')
 // code goes here
 console.timeEnd('Runtime:')
+*/
+
+/* Tasks:
+1: Making sure our grid is solvable = DONE.  (Thanks to: "ensuring a sliding puzzle is solvable"
+    https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php
+
+In summary, when n is odd, an n-by-n board is solvable if and only if its number of inversions is even.
+That is, when n is even, an n-by-n board is solvable if and only if the number of inversions plus the 
+row of the blank square is odd. This assumes we start with row 0.)
+
+2: Rendering this grid in HTML - pretty much nearly DONE.
+3: How do we move pieces around?  What about selecting the size of the grid?  Maybe add a timer/keep track
+   of the number of moves?  Resetting the puzzle?
+4: Check to see if the current grid as is is the solution.
+
+From Thursday week 2 office hour:
+https://codepen.io/WolfsVeteran/pen/MWBEaGe - project board mockup where you can move stuff from Melissa
+https://codepen.io/CSR-89/pen/OXBwOJ - someone's 3x3 sliding puzzle
+https://codepen.io/M_J_Robbins/pen/VeNWQQ - cool CSS with sliding puzzle
+
 */
