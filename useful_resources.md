@@ -42,6 +42,9 @@
 - [Django tutorials](https://www.dj4e.com/)
 - [Visual of SQL joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/)
 - [File converter](https://cloudconvert.com/)
+- [JS console tricks](https://javascript.plainenglish.io/why-using-just-console-log-in-2023-is-a-big-no-no-ef99f1940901)
+- Alternatives to Adobe products (courtesy of https://twitter.com/XdanielArt/status/1434611199140896772):
+![Alternatives to Adobe products image](./free_adobe_alternatives_updates.png)
 
 ## Images
 - [Free static images](https://unsplash.com/)
