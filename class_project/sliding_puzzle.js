@@ -79,9 +79,25 @@ const isSolvable = (thisGrid) => {
     return thisGrid.length % 2 == 0 ? inversionCount + rowWithBlankSpace % 2 == 1 : inversionCount % 2 == 0;
 }
 
+const isGridSolved = (thisGrid) => {
+    let oneDimensionalGrid = [];
+    for (let row = 0; row < thisGrid.length; row++) {
+        oneDimensionalGrid = [...oneDimensionalGrid, ...thisGrid[row]]; // Add current row
+    }
+    // Now check each value - not including the last value because if we make it there, the grid is solved and the last item is null
+    for (let curInd = 0; curInd < oneDimensionalGrid.length - 1; curInd++) {
+        if (oneDimensionalGrid[curInd] !== curInd + 1) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const grid1 = makeSolvableGrid(3);
 // console.log(grid1);
 console.log(isSolvable(grid1));
+
+console.log(isGridSolved(grid1));
 
 let gridDiv = document.getElementById("main_grid");
 for (let i = 0; i < grid1.length; i++) {
