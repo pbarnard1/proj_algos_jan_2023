@@ -49,6 +49,7 @@ const generateNewPuzzle = (puzzleSize) => { // puzzleSize = number of rows (and 
     return newGrid;
 }
 
+
 const isSolvable = (thisGrid) => {
     console.log(thisGrid);
     let inversionCount = 0; // Count the number of inversions in the grid
@@ -107,12 +108,39 @@ for (let i = 0; i < grid1.length; i++) {
     for (let j = 0; j < grid1[i].length; j++) {
         let newItem = document.createElement('div');
         // ds-data and use that to leverage where we are in the grid - thank you Thomas!
-        
+        /*
+            https://www.w3schools.com/tags/att_data-.asp
+            https://www.geeksforgeeks.org/how-to-get-the-data-attributes-of-an-element-using-javascript/
+        */
         // newItem.classList.add(); // Adding a class
         // newItem.classList.toggle(); // For toggling a class (adding/removing)
         let actualValue = grid1[i][j];
+        newItem.setAttribute("data-x",i);
+        newItem.setAttribute("data-y",j);
+        newItem.addEventListener("click",function(e) {
+            let xThisTile = parseInt(this.getAttribute("data-x"));
+            let yThisTile = parseInt(this.getAttribute("data-y"));
+            let blankSpaceElement = document.getElementById("blank_space");
+            let xBlank = parseInt(blankSpaceElement.getAttribute("data-x"));
+            let yBlank = parseInt(blankSpaceElement.getAttribute("data-y"));
+            if ((yBlank === yThisTile && Math.abs(xThisTile - xBlank) === 1) || (xBlank === xThisTile && Math.abs(yThisTile - yBlank) === 1)) { // Same row, clicked tile is one column away from blank tile
+                // Switch the values in the divs
+                let valueToMove = this.innerText;
+                // Reassign classes and ids as necessary
+                blankSpaceElement.classList.toggle("item");
+                this.classList.toggle("item");
+                blankSpaceElement.removeAttribute("id");
+                blankSpaceElement.innerText = null;
+                this.setAttribute("id","blank_space");
+                blankSpaceElement.appendChild(document.createTextNode(valueToMove));
+                // Switch the values in the array
+                [grid1[xThisTile][yThisTile], grid1[xBlank][yBlank]] = [grid1[xBlank][yBlank], grid1[xThisTile][yThisTile]];
+                // Now check to see if the puzzle is solved
+                isGridSolved(grid1);
+            } // Otherwise, we can't move pieces
+        });
         if (actualValue === null) {
-            newItem.setAttribute("class","blank_space");
+            newItem.setAttribute("id","blank_space"); // Changed from "class" to "id"
         } else {
             newItem.setAttribute("class","item");
             let valueToInsert = document.createTextNode(actualValue); // Allows us to put in the actual value in the div itself
@@ -122,6 +150,9 @@ for (let i = 0; i < grid1.length; i++) {
     }
     gridDiv.appendChild(newRow);
 }
+
+
+
 /* Thanks Gary!  This is a good way to check to see how long your code runs!
 console.time('Runtime:')
 // code goes here

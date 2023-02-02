@@ -31,7 +31,7 @@ html {
 
 }
 
-.item, .blank_space {
+.item, #blank_space {
     min-width: 50px;
     min-height: 50px;
     border: 2px solid black;
@@ -46,7 +46,7 @@ html {
     background-color: lightcoral;
 }
 
-.blank_space {
+#blank_space {
     background-color: black;
 }
 

@@ -34,7 +34,7 @@ const recursiveCountElements = (currentArray) => {
     let count = 0; // Number of items in the current array
     // Go through this array, one element at a time
     for (let i = 0; i < currentArray.length; i++) {
-        if (Array.isArray(currentArray[i])) { // If the current item is a subarray
+        if (Array.isArray(currentArray[i])) { // If the current item is a subarray (better than using "typeof" keyword)
             count += recursiveCountElements(currentArray[i]); // Count the items in this subarray
         } else {
             count++; // Not an array, so add one to the count only
